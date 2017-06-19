@@ -1,0 +1,34 @@
+version: "2"
+
+services:
+  tetris-is-love-fe:
+    build: ./tetris-is-love-fe
+    stdin_open: true
+    ports:
+      - "8001:8001"
+    expose:
+      - 8910
+    environment:
+      - NODE_ENV
+    volumes:
+      - ./tetris-is-love-fe/tetris-is-love-fe:/tetris-is-love-fe/:rw
+      - /tetris-is-love-fe/node_modules
+    links:
+      - tetris-is-love-master
+
+  tetris-is-love-master:
+    build: ./tetris-is-love-master
+    stdin_open: true
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV
+    links:
+      - mongo
+
+  mongo:
+    stdin_open: true
+    tty: true
+    image: mongo:3.2
+    expose:
+      - 27017
