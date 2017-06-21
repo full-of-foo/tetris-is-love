@@ -1,6 +1,6 @@
 import Promise from 'bluebird';
-import bcrypt from 'bcryptjs';
 import mongoose from './utils/mongoose';
+import {getSafePassword} from '../lib/password';
 import {schemaOpts, addHelperFns} from './base';
 
 const UserSchema = new mongoose.Schema({
@@ -19,16 +19,14 @@ UserSchema.set('toJSON', {
 
 addHelperFns(UserSchema);
 
-UserSchema.statics.safeCreate = function _safeCreate(data) {
+UserSchema.statics.safeUpdate = function _safeUpdate(data) {
     return new Promise((resolve, reject) => {
         const payload = Object.assign({}, data);
-        if(payload.password) {
-            const salt = bcrypt.genSaltSync();
-            payload.password = bcrypt.hashSync(payload.password, salt);
-        }
+        if(payload.password) payload.password = getSafePassword(payload.password);
 
-        const user = new this(payload).save(err => {
-            err ? reject(err) : resolve(user);
+        const filter = payload._id ? {_id: payload._id} : {};
+        this.findOneAndUpdate(filter, payload, {new: true, upsert: true}, (err, res) => {
+            err ? reject(err) : resolve(res);
         });
     });
 };

@@ -1,0 +1,82 @@
+body {
+  margin: 0;
+}
+
+/* Disable ugly boxes around images in IE10 */
+a img{
+  border: 0px;
+}
+
+::-moz-selection {
+  background-color: #6ab344;
+  color: #fff;
+}
+
+::selection {
+  background-color: #6ab344;
+  color: #fff;
+}
+
+.landing-container {
+  position: relative;
+  height: 800px;
+  background-color: #f3f3f3;
+  background: url('/static/img/slide01.jpg') center 30% no-repeat;
+  background-size: cover;
+  text-align: center;
+}
+
+.logo-font {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  line-height: 1;
+  color: #767777;
+  font-weight: 500;
+}
+
+.slogan {
+  font-size: 60px;
+  padding-top: 160px;
+}
+
+.sub-slogan {
+  font-size: 21px;
+  padding-top: 24px;
+}
+
+.play-now {
+  font-size: 21px;
+  padding-top: 400px;
+}
+
+  .play-now a {
+    text-decoration: none;
+    color: #767777;
+    font-weight: 300;
+  }
+
+@media (max-width: 900px) {
+  .landing-container {
+    height: 350px;
+  }
+
+  .slogan {
+    font-size: 26px;
+    margin: 0 16px;
+    padding-top: 24px;
+  }
+
+  .sub-slogan {
+    font-size: 16px;
+    margin: 0 16px;
+    padding-top: 8px;
+  }
+
+  .play-now {
+    padding-top: 200px;
+    font-size: 16px;
+  }
+
+  .play-now img {
+    height: 12px;
+  }
+}

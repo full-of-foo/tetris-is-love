@@ -10,7 +10,7 @@ describe('Model: User', () => {
     });
 
     it('should have required fields', done => {
-        User.safeCreate({})
+        User.safeUpdate({})
             .then(user => expect(user).not.toBeDefined())
             .catch(err => {
                 expect(err).toBeTruthy();
@@ -20,7 +20,7 @@ describe('Model: User', () => {
     });
 
     it('should be updatable and deletable', done => {
-        User.safeCreate(data)
+        User.safeUpdate(data)
             .then(u => expect(u._id).toBeTruthy())
             .then(() => User.findOneAndRemove()
                             .then(() => User.count((_, n) => expect(n).toEqual(0))))
@@ -30,7 +30,7 @@ describe('Model: User', () => {
     });
 
     it('should create a hashed password', done => {
-        User.safeCreate(data)
+        User.safeUpdate(data)
             .then(u => {
                 expect(u.password.length).toBe(60);
                 expect(u.password).not.toEqual(data.password);

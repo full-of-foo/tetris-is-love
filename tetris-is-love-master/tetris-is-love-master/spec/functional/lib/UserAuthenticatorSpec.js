@@ -15,7 +15,7 @@ describe('Lib: UserAuthenticator', () => {
         expect(badUserAuthenticator.authenticate(userData.password)).toBe(false);
         expect(invalidUserAuthenticator.authenticate(userData.password)).toBe(false);
 
-        User.safeCreate(userData)
+        User.safeUpdate(userData)
             .then(u => expect(new UserAuthenticator(u).authenticate(userData.password)).toBe(true))
             .finally(done);
     });
